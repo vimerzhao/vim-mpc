@@ -23,3 +23,11 @@ setlocal nonumber
 command! -buffer PlaySelectedSong call mpc#PlaySong(line("."))
 command! -buffer ToggleRandom call mpc#ToggleRandom()
 command! -buffer ToggleRepeat call mpc#ToggleRepeat()
+
+nnoremap <silent> <plug>MpcToggleplayback :TogglePlayback<cr>
+nnoremap <silent> <buffer> <c-x> :PlaySelectedSong<cr>
+nnoremap <silent> <buffer> <c-a> :ToggleRandom<cr>
+nnoremap <silent> <buffer> <c-e> :ToggleRepeat<cr>
+if !hasmapto("<plug>MpcToggleplayback")
+    nmap <leader>p <plug>MpcToggleplayback
+endif

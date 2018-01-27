@@ -72,11 +72,12 @@ function! mpc#TogglePlayback()
     let message .= split(result, ' ')[0] == '[paused]' ? 'PAUSED' : 'PLAYING'
     echomsg message
 endfunction
+
 function! mpc#ToggleRandom()
     let command = 'mpc random'
     let result = split(system(command), '\n')
     let status = len(result) == 3 ? result[2] : result[0]
-    let message = split(status, ' ')[2] == 'random: off'
+    let message = substitute(split(status, '   ')[2], ' ', '', 'g') == 'random:off'
                 \ ? '[mpc] RANDOM: OFF' : '[mpc] RANDOM: ON'
     echomsg message
 endfunction
@@ -84,7 +85,7 @@ function! mpc#ToggleRepeat()
     let command = 'mpc repeat'
     let result = split(system(command), '\n')
     let status = len(result) == 3 ? result[2] : result[0]
-    let message = split(status, ' ')[1] == 'repeat: off'
+    let message = substitute(split(status, '   ')[1], ' ', '', 'g') == 'repeat:off'
                 \ ? '[mpc] REPEAT: OFF' : '[mpc] REPEAT: ON'
     echomsg message
 endfunction
